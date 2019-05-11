@@ -1,1 +1,22 @@
-theme: jekyll-theme-cayman
+plugins:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-avatar
+  - jemoji
+  - jekyll-mentions
+
+permalink:           /:categories/:year/:month/:day/:title
+
+title:               Bendwarn blog
+paginate:            5
+
+sass:
+  style: compressed
+
+# About/contact
+author:
+  name:              bendwarn
+  url:               https://github.com/bendwarn
+  email:             bendwarn@gmail.com
