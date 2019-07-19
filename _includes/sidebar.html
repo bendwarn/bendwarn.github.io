@@ -1,11 +1,15 @@
 <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
      styles, `#sidebar-checkbox` for behavior. -->
-<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+<input type="checkbox" id="sidebar-checkbox" hidden>
+<label class="menuicon" for="sidebar-checkbox">
+  <span class="bread bread-top"><span class="crust crust-top"></span></span>
+  <span class="bread bread-bottom"><span class="crust crust-bottom"></span></span>
+</label>
 
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item">
-    <p>{{ site.description }}</p>
+    <p></p>
   </div>
 
   <nav class="sidebar-nav">
@@ -27,7 +31,7 @@
 
     <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive">Archive</a>
   </nav>
-  <div class="sidebar-item">
+  <!-- <div class="sidebar-item">
     <p>My projects:</p>
   </div>
   <nav class="sidebar-nav">
@@ -36,7 +40,7 @@
         <a class="sidebar-nav-item" href="{{ p.homepage }}">{{ p.name }}<br><em>{{ p.description }}</em></a>
       {% endif %}
     {% endfor %}
-  </nav>
+  </nav> -->
 
   <div class="sidebar-item">
     <p>

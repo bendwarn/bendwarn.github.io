@@ -20,3 +20,51 @@
 
 .konosuba
   font-family: konosuba
+
+// sidebar
+#sidebar-checkbox:checked ~ .sidebar
+  visibility: visible
+
+.menuicon
+  display: block
+  position: absolute
+  width: 48px
+  height: 48px
+  z-index: 11
+  cursor: pointer
+  transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)
+  &:hover
+    opacity: .65
+
+.bread
+  position: absolute
+  top: 9px
+  left: 9px
+  width: 30px
+  height: 30px
+  transition: transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96)
+  #sidebar-checkbox:checked ~ .menuicon &
+    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s
+
+#sidebar-checkbox:checked ~ .menuicon .bread-top
+  transform: rotate(45deg)
+#sidebar-checkbox:checked ~ .menuicon .bread-bottom
+  transform: rotate(-45deg)
+
+.crust
+  position: absolute
+  display: block
+  width: 17px
+  height: 1px
+  background: #fff
+  left: 7px
+  transition: transform .1596s cubic-bezier(0.52, 0.16, 0.52, 0.84) .1008s
+  #sidebar-checkbox:checked ~ .menuicon &
+    transition: transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96)
+    transform: none
+.crust-top
+  top: 14px
+  transform: translateY(-3px)
+.crust-bottom
+  bottom: 14px
+  transform: translateY(3px)
