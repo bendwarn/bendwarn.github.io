@@ -30,6 +30,9 @@ jobs:
           source: ./
           destination: ./_site
 
+      - name: Verify homepage article titles
+        run: python3 scripts/check-homepage-title.py ./_site/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
