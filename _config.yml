@@ -10,6 +10,8 @@ plugins:
 permalink:           /:categories/:year/:month/:day/:title
 
 url: https://bendwarn.github.io
+baseurl: ""
+repository: bendwarn/bendwarn.github.io
 title:               Bendwarn blog
 paginate:            5
 
