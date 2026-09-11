@@ -8,12 +8,8 @@
 
 <!-- Toggleable sidebar -->
 <div class="sidebar" id="sidebar">
-  <div class="sidebar-item">
-    <p></p>
-  </div>
-
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="{{ site.github.repository_url }}">GitHub Home</a>
+    <a class="sidebar-nav-item" href="{{ site.github.repository_url }}">GitHub repository</a>
 
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
@@ -29,18 +25,8 @@
       {% endif %}
     {% endfor %}
 
-    <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive">Archive</a>
+    <a class="sidebar-nav-item{% if page.url == '/archive/' %} active{% endif %}" href="{{ site.baseurl }}/archive/">Archive</a>
   </nav>
-  <!-- <div class="sidebar-item">
-    <p>My projects:</p>
-  </div>
-  <nav class="sidebar-nav">
-    {% for p in site.github.public_repositories %}
-      {% if p.has_pages and p.url != site.url %}
-        <a class="sidebar-nav-item" href="{{ p.homepage }}">{{ p.name }}<br><em>{{ p.description }}</em></a>
-      {% endif %}
-    {% endfor %}
-  </nav> -->
 
   <div class="sidebar-item">
     <p>
