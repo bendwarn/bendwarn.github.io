@@ -24,11 +24,19 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          bundler-cache: true
+
+      - name: Build with Jekyll
+        run: bundle exec github-pages build --source ./ --destination ./_site
+        env:
+          JEKYLL_ENV: production
+          JEKYLL_GITHUB_TOKEN: ${{ github.token }}
+          PAGES_REPO_NWO: ${{ github.repository }}
+          JEKYLL_BUILD_REVISION: ${{ github.sha }}
+          PAGES_API_URL: ${{ github.api_url }}
 
       - name: Verify homepage article titles
         run: python3 scripts/check-homepage-title.py ./_site/index.html
