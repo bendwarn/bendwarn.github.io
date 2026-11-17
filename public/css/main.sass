@@ -21,50 +21,172 @@
 .konosuba
   font-family: konosuba
 
-// sidebar
-#sidebar-checkbox:checked ~ .sidebar
-  visibility: visible
+// Keep the control available to keyboard and assistive technology users.
+.sidebar-checkbox
+  position: fixed
+  width: 1px
+  height: 1px
+  margin: 0
+  overflow: hidden
+  clip: rect(0, 0, 0, 0)
+  clip-path: inset(50%)
+  white-space: nowrap
 
 .menuicon
+  position: fixed
+  top: .5rem
+  left: .5rem
+  z-index: 12
   display: block
-  position: absolute
-  width: 48px
-  height: 48px
-  z-index: 11
+  width: 2.5rem
+  height: 2.5rem
+  border-radius: .3rem
+  color: #244d35
   cursor: pointer
-  transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1)
-  &:hover
-    opacity: .65
+  transition: background-color .2s ease, color .2s ease
+
+.menuicon:hover
+  background-color: rgba(36, 77, 53, .1)
+
+#sidebar-checkbox:focus-visible ~ .menuicon
+  outline: 3px solid #244d35
+  outline-offset: 2px
+
+#sidebar-checkbox:checked ~ .menuicon
+  color: #fff
+
+#sidebar-checkbox:checked ~ .menuicon:hover
+  background-color: rgba(255, 255, 255, .12)
+
+#sidebar-checkbox:checked:focus-visible ~ .menuicon
+  outline-color: #b4ddb9
 
 .bread
   position: absolute
-  top: 9px
-  left: 9px
-  width: 30px
-  height: 30px
-  transition: transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96)
-  #sidebar-checkbox:checked ~ .menuicon &
-    transition: transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s
-
-#sidebar-checkbox:checked ~ .menuicon .bread-top
-  transform: rotate(45deg)
-#sidebar-checkbox:checked ~ .menuicon .bread-bottom
-  transform: rotate(-45deg)
+  top: 50%
+  left: 50%
+  width: 1.1rem
+  height: 2px
+  transition: transform .2s ease
 
 .crust
-  position: absolute
   display: block
-  width: 17px
-  height: 1px
-  background: #fff
-  left: 7px
-  transition: transform .1596s cubic-bezier(0.52, 0.16, 0.52, 0.84) .1008s
-  #sidebar-checkbox:checked ~ .menuicon &
-    transition: transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96)
-    transform: none
-.crust-top
-  top: 14px
-  transform: translateY(-3px)
-.crust-bottom
-  bottom: 14px
-  transform: translateY(3px)
+  width: 100%
+  height: 100%
+  border-radius: 1px
+  background: currentColor
+
+.bread-top
+  transform: translate(-50%, -4px)
+
+.bread-bottom
+  transform: translate(-50%, 3px)
+
+#sidebar-checkbox:checked ~ .menuicon .bread-top
+  transform: translate(-50%, 0) rotate(45deg)
+
+#sidebar-checkbox:checked ~ .menuicon .bread-bottom
+  transform: translate(-50%, 0) rotate(-45deg)
+
+.sidebar-backdrop
+  position: fixed
+  inset: 0
+  z-index: 9
+  visibility: hidden
+  background: rgba(15, 25, 19, .45)
+  opacity: 0
+  cursor: pointer
+  transition: opacity .3s ease, visibility .3s ease
+
+#sidebar-checkbox:checked ~ .sidebar-backdrop
+  visibility: visible
+  opacity: 1
+
+.sidebar
+  display: flex
+  flex-direction: column
+  padding: 4.5rem 0 1.25rem
+  font-size: .9rem
+  color: #c8d4ca
+  background: #1c2d23
+  transition: transform .3s ease, visibility .3s ease
+
+.sidebar > *
+  flex-shrink: 0
+
+#sidebar-checkbox:checked ~ .sidebar
+  visibility: visible
+
+.sidebar-heading
+  padding: 0 1.5rem 1.5rem
+
+.sidebar-title
+  display: block
+  color: #fff
+  font-size: 1.15rem
+  line-height: 1.3
+
+.sidebar-nav
+  padding: .75rem .75rem 1rem
+  border-top: 1px solid rgba(255, 255, 255, .14)
+  border-bottom: 0
+
+.sidebar-nav-item
+  display: flex
+  align-items: center
+  gap: .75rem
+  margin: .15rem 0
+  padding: .7rem .75rem
+  border: 0
+  border-radius: .25rem
+  color: #e5ece6
+  line-height: 1.5
+
+.sidebar-nav-item svg
+  flex: 0 0 1.1rem
+  width: 1.1rem
+  height: 1.1rem
+
+.sidebar-nav-item.active
+  color: #fff
+  font-weight: 700
+  background: #355b40
+  box-shadow: inset 3px 0 #b4ddb9
+
+.sidebar-nav-item:hover,
+.sidebar-nav-item:focus
+  background: rgba(255, 255, 255, .12)
+
+.sidebar a:focus-visible
+  outline: 2px solid #b4ddb9
+  outline-offset: 2px
+
+.sidebar-secondary
+  margin-top: auto
+  padding: 1rem 1.5rem .25rem
+  border-top: 1px solid rgba(255, 255, 255, .14)
+
+.sidebar .sidebar-external
+  display: inline-flex
+  align-items: center
+  justify-content: center
+  width: 44px
+  height: 44px
+  margin-left: -10px
+  border-radius: .25rem
+  color: #c8d4ca
+
+.sidebar-external:hover
+  background: rgba(255, 255, 255, .12)
+
+.sidebar-external svg
+  width: 24px
+  height: 24px
+
+.sidebar-item
+  padding: .5rem 1.5rem 0
+  font-size: .7rem
+
+@media (prefers-reduced-motion: reduce)
+  .menuicon, .bread, .sidebar-backdrop, .sidebar
+    transition: none

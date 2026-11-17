@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Archive
+title: 歷史
 permalink: /archive/
 ---
 
 <div class="archive">
-  <h1 class="page-title">Archive</h1>
+  <h1 class="page-title">歷史</h1>
 
   <ul class="archive-posts">
     {% for post in site.posts %}

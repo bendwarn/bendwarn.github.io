@@ -54,7 +54,7 @@ archive_link = next(
     (
         link
         for link in index.links
-        if "".join(link["text"]).strip() == "Archive"
+        if "".join(link["text"]).strip() == "歷史"
     ),
     None,
 )
@@ -73,7 +73,7 @@ archive_heading = next(
     (
         heading
         for heading in archive.headings
-        if "".join(heading["text"]).strip() == "Archive"
+        if "".join(heading["text"]).strip() == "歷史"
     ),
     None,
 )
