@@ -3,17 +3,20 @@ layout: post
 comments: true
 title: Red Black Tree In Functional Programming
 ---
-本文介紹 FP 如何實作紅黑樹的新增和刪除，如果不清楚紅黑樹是什麼，或忘記如何 imperatively 操作紅黑樹，可以先到[紅黑樹介紹](http://alrightchiu.github.io/SecondRound/red-black-tree-introjian-jie.html)獲得來龍去脈。
+本文介紹 FP 如何實作紅黑樹的新增和刪除，如果不清楚紅黑樹是什麼，或忘記如何 imperatively 操作紅黑樹，可以先到[紅黑樹介紹](https://alrightchiu.github.io/SecondRound/red-black-tree-introjian-jie.html)獲得來龍去脈。
 
 好的，知道那些奇怪的操作之後，可以忘掉了，因為 FP 用不到。
 
-##### 新增
+## 新增
+
 到底要怎麼講解新增，我想了很久，但我看不出來有什麼文字比這張圖更能解釋程式在幹嘛的。（參考資料 2 有 haskell 程式。）
-![insertion balance](https://i.imgur.com/WiPyDZO.png){:height="75%" width="75%"}
+
+![新增後的四種連續紅色節點情況，皆可平衡成相同的樹形](https://i.imgur.com/WiPyDZO.png)
 
 非常精妙的將全部 case 整理成四種情況，並且歸一到相同解！
 
-##### 刪除
+## 刪除
+
 真正的困難藏在這裡，往下讀之前可以試試看：你現在知道多一個紅的要怎麼平衡，思考一下少一個黑的如何平衡？
 
 解法的核心在於引入兩個新顏色，深黑與負黑，分別代表 +2, -1。（你可能記得紅黑樹每條路徑的黑點數量要相同，換句話說這些顏色其實是計數器，黑跟紅代表 1 跟 0）接著運用 divide and conquer 分成三個步驟：
@@ -25,15 +28,30 @@ title: Red Black Tree In Functional Programming
 即使多兩個顏色，也只多出六種情況，最美妙的是，其中四種可以照抄新增的！
 剩下的則負責將左圖變成右圖
 
-![BB NB](http://matt.might.net/articles/red-black-delete/images/red-black-slides.018.png) | ![eliminate](http://matt.might.net/articles/red-black-delete/images/red-black-slides.019.png)
+<div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
+    <img src="https://matt.might.net/articles/red-black-delete/images/red-black-slides.018.png" alt="轉換前：深黑色的 z 節點下有負黑色的 x 節點" style="width: 100%; margin-bottom: .25rem;">
+    <figcaption>轉換前</figcaption>
+  </figure>
+  <figure style="flex: 1 1 0; min-width: 0; margin: 0;">
+    <img src="https://matt.might.net/articles/red-black-delete/images/red-black-slides.019.png" alt="轉換後：y、x、z 為黑色節點，w 為紅色節點" style="width: 100%; margin-bottom: .25rem;">
+    <figcaption>轉換後</figcaption>
+  </figure>
+</div>
 
 其餘的就是一些有關刪除的 helper function，你的作業就寫完啦！（誰會把這個當作業啊，還有人性嗎？）
 
 ## 後記
-會想做這個的初衷是為了製作測試腦袋是否清醒的石蕊試紙，突發奇想覺得如果能正確心算操作紅黑樹的話，那腦袋大概就是清醒的（想到這種點子的時候大概是不清醒的）。同時想順便練習 elm，於是 project 就這麼開始了。樹的呈現花了一點心思，因為我也沒用過 svg，需要另外查資料；拉線方式也從一開始的固定角度變成直接計算座標。如果想看看這棵樹的實際呈現，可以參考[紅黑樹視覺化展示](https://bendwarn.github.io/RedBlackTree/index.html)。重頭戲果然還是在演算法。我過於拘泥原本作法，想了很久還是想不出來，問神之後就找到那兩篇論文。
+
+會想做這個的初衷是為了製作測試腦袋是否清醒的石蕊試紙，突發奇想覺得如果能正確心算操作紅黑樹的話，那腦袋大概就是清醒的（想到這種點子的時候大概是不清醒的）。同時想順便練習 elm，於是 project 就這麼開始了。
+
+樹的呈現花了一點心思，因為我也沒用過 svg，需要另外查資料；拉線方式也從一開始的固定角度變成直接計算座標。如果想看看這棵樹的實際呈現，可以參考[紅黑樹視覺化展示](https://bendwarn.github.io/RedBlackTree/index.html)。
+
+重頭戲果然還是在演算法。我過於拘泥原本作法，想了很久還是想不出來，問神之後就找到那兩篇論文。
 
 寫完之後才發現，根本沒用嘛，操作麻煩只存在於 imperative 啊，變成這樣就算喝醉也能心算新增和刪除了吧。
 
-###### 參考資料：
-1. <https://wiki.rice.edu/confluence/download/attachments/2761212/Okasaki-Red-Black.pdf>
-2. <http://matt.might.net/articles/red-black-delete>
+## 參考資料
+
+1. [Red-Black Trees in a Functional Setting](https://wiki.rice.edu/confluence/download/attachments/2761212/Okasaki-Red-Black.pdf)
+2. [Missing method: How to delete from Okasaki's red-black trees](https://matt.might.net/articles/red-black-delete/)
