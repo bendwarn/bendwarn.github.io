@@ -4,24 +4,36 @@ title: 標籤
 permalink: /tags/
 ---
 
-<div class="tags">
-  <h1 class="page-title">標籤</h1>
+<div class="tags collection-page" lang="zh-Hant">
+  <header class="collection-header">
+    <h1 class="page-title">標籤</h1>
+    <p>從感興趣的主題開始閱讀</p>
+  </header>
 
   {% assign sorted_tags = site.tags | sort %}
-  {% for tag in sorted_tags %}
-    {% assign tag_id = tag[0] | url_encode %}
-    <section class="tag-section" id="tag-{{ tag_id }}">
-      <h2>{{ tag[0] | escape }}</h2>
-      <ul>
-        {% for post in tag[1] %}
-        <li>
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_string }}</time>
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </section>
+  {% if sorted_tags.size > 0 %}
+    <nav class="tag-index" aria-label="標籤索引">
+      {% for tag in sorted_tags %}
+        {% assign tag_id = tag[0] | url_encode %}
+        <a href="#tag-{{ tag_id | url_encode }}">{{ tag[0] | escape }} <span>{{ tag[1].size }}</span></a>
+      {% endfor %}
+    </nav>
+
+    {% for tag in sorted_tags %}
+      {% assign tag_id = tag[0] | url_encode %}
+      <section class="tag-section collection-section" id="tag-{{ tag_id }}">
+        <h2 class="collection-heading">{{ tag[0] | escape }} <span class="collection-count">{{ tag[1].size }} 篇</span></h2>
+        <ul class="collection-posts">
+          {% for post in tag[1] %}
+          <li>
+            <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y / %m / %d' }}</time>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    {% endfor %}
   {% else %}
-    <p>目前沒有標籤。</p>
-  {% endfor %}
+    <p class="collection-empty">目前沒有標籤。</p>
+  {% endif %}
 </div>

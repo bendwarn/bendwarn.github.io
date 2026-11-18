@@ -34,9 +34,103 @@
   color: #244d35
   font-size: .8rem
 
-.tag-section
+// Archive and tag pages share a quiet, readable list treatment.
+.collection-header
+  padding-bottom: 1.5rem
+  border-bottom: 1px solid #dce5dd
+
+.collection-header .page-title
+  margin-bottom: .35rem
+
+.collection-header p
+  margin: 0
+  color: #6d7b70
+  font-size: .85rem
+
+.collection-section
+  margin-top: 2.5rem
+  scroll-margin-top: 1.5rem
+
+.collection-heading
+  display: flex
+  align-items: baseline
+  flex-wrap: wrap
+  gap: .65rem
+  margin: 0 0 .5rem
+  color: #244d35
+  font-size: 1.2rem
+
+.collection-count
+  color: #778479
+  font-size: .7rem
+  font-weight: 400
+
+.collection-posts
+  margin: 0
+  padding: 0
+  list-style: none
+
+.collection-posts li
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  gap: 1rem
+  padding: .85rem 0
+  border-bottom: 1px solid #edf1ed
+
+.collection-posts a
+  min-width: 0
+  color: #303d33
+  overflow-wrap: anywhere
+
+.collection-posts a:hover,
+.collection-posts a:focus-visible
+  color: #244d35
+  text-decoration: underline
+
+.collection-posts time
+  flex: none
+  color: #78857b
+  font-size: .7rem
+  font-variant-numeric: tabular-nums
+  white-space: nowrap
+
+.tag-index
+  display: flex
+  flex-wrap: wrap
+  gap: .5rem
+  margin-top: 1.5rem
+
+.tag-index a
+  display: inline-flex
+  align-items: baseline
+  gap: .4rem
+  padding: .3rem .7rem
+  border: 1px solid #dce8de
+  border-radius: .3rem
+  background: #f4f8f4
+  color: #244d35
+  font-size: .8rem
+
+.tag-index a:hover,
+.tag-index a:focus-visible
+  border-color: #9ab5a0
+  background: #e8f1e9
+  text-decoration: none
+
+.tag-index span
+  color: #718b76
+  font-size: .7rem
+
+.collection-empty
   margin-top: 2rem
-  scroll-margin-top: 1rem
+  color: #6d7b70
+
+@media (max-width: 30em)
+  .collection-posts li
+    align-items: flex-start
+    flex-direction: column
+    gap: .2rem
 
 // Keep the control available to keyboard and assistive technology users.
 .sidebar-checkbox
