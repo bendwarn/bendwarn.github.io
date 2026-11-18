@@ -26,7 +26,7 @@ class HomepageTitleParser(HTMLParser):
 
         if tag == "a":
             in_post_title = any(
-                item["tag"] == "h1" and "post-title" in item["classes"]
+                item["tag"] in {"h1", "h2"} and "post-title" in item["classes"]
                 for item in self.open_elements
             )
             if in_post_title:

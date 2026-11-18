@@ -3,38 +3,54 @@ layout: default
 title: Home
 ---
 
-<div class="posts">
-  {% for post in paginator.posts %}
-  <div class="post">
-    <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
-      </a>
-    </h1>
+<div class="home" lang="zh-Hant">
+  <header class="collection-header home-header">
+    <h1 class="page-title">最新文章</h1>
+    <p>依時間瀏覽最新文章</p>
+  </header>
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
-    {% if post.comments %}
-    <a class="post-comments" href="{{ post.url | relative_url }}#comments">Comments</a>
-    {% endif %}
+  <div class="posts">
+    {% for post in paginator.posts %}
+    <article class="post home-post">
+      <header class="home-post-header">
+        <h2 class="post-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        </h2>
+        <div class="home-post-meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y / %m / %d' }}</time>
+          {% if post.comments %}
+          <a class="post-comments" href="{{ post.url | relative_url }}#comments">留言</a>
+          {% endif %}
+        </div>
+        {% if post.tags.size > 0 %}
+        <div class="home-post-tags" aria-label="文章標籤">
+          {% for tag in post.tags %}
+            {% assign tag_id = tag | url_encode %}
+            <a href="{{ '/tags/' | relative_url }}#tag-{{ tag_id | url_encode }}">{{ tag | escape }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </header>
 
-    {{ post.content }}
-  </div>
-  {% endfor %}
-</div>
-
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="/page{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="/">Newer</a>
+      <div class="home-post-content">{{ post.content }}</div>
+    </article>
     {% else %}
-      <a class="pagination-item newer" href="/page{{paginator.previous_page}}">Newer</a>
+    <p class="collection-empty">目前沒有文章。</p>
+    {% endfor %}
+  </div>
+
+  {% if paginator.total_pages > 1 %}
+  <nav class="pagination home-pagination" aria-label="文章分頁">
+    {% if paginator.next_page %}
+      <a class="pagination-item older" href="{{ paginator.next_page_path | relative_url }}">← 較舊文章</a>
+    {% else %}
+      <span class="pagination-item older" aria-disabled="true">← 較舊文章</span>
     {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
+    {% if paginator.previous_page %}
+      <a class="pagination-item newer" href="{{ paginator.previous_page_path | relative_url }}">較新文章 →</a>
+    {% else %}
+      <span class="pagination-item newer" aria-disabled="true">較新文章 →</span>
+    {% endif %}
+  </nav>
   {% endif %}
 </div>
