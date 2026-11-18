@@ -29,6 +29,14 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Test portfolio data generation
+        run: python3 -B scripts/test-fetch-portfolio.py
+
+      - name: Generate portfolio data
+        run: python3 scripts/fetch-portfolio.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Build with Jekyll
         run: bundle exec github-pages build --source ./ --destination ./_site
         env:

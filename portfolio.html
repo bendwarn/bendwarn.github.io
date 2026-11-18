@@ -1,0 +1,22 @@
+---
+layout: default
+title: 作品集
+permalink: /portfolio/
+---
+
+<div class="portfolio collection-page" lang="zh-Hant">
+  <header class="collection-header">
+    <h1 class="page-title">作品集</h1>
+    <p>使用 GitHub Pages 發布的專案</p>
+  </header>
+
+  {% for project in site.data.portfolio %}
+  <article class="portfolio-project">
+    <h2><a href="{{ project.url | escape }}">{{ project.name | escape }}</a></h2>
+    {% if project.description %}<p>{{ project.description | escape }}</p>{% endif %}
+    <a class="portfolio-repository" href="{{ project.repository_url | escape }}">GitHub 程式碼庫</a>
+  </article>
+  {% else %}
+  <p class="collection-empty">目前沒有作品。</p>
+  {% endfor %}
+</div>
