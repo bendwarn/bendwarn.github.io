@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check that Disqus comment counting cannot replace homepage post titles."""
+"""Check that homepage post titles and comment links remain distinct."""
 
 from html.parser import HTMLParser
 from pathlib import Path
@@ -77,19 +77,10 @@ for title_link in parser.title_links:
             f"(title={title!r}, href={title_link['attrs'].get('href')!r})"
         )
 
-if len(parser.comment_links) != len(parser.title_links):
-    fail(
-        "each homepage post needs one separate post-comments link "
-        f"(titles={len(parser.title_links)}, comments={len(parser.comment_links)})"
-    )
-
 for comment_link in parser.comment_links:
-    if "data-disqus-identifier" not in comment_link["attrs"]:
-        fail("post-comments link is missing data-disqus-identifier")
-    if not comment_link["attrs"].get("href", "").endswith("#disqus_thread"):
-        fail("post-comments link must target #disqus_thread")
+    if not comment_link["attrs"].get("href", "").endswith("#comments"):
+        fail("post-comments link must target #comments")
+    if "data-disqus-identifier" in comment_link["attrs"]:
+        fail("post-comments link still contains a Disqus identifier")
 
-print(
-    "PASS: homepage post titles are isolated from Disqus and "
-    "comment counts have separate targets"
-)
+print("PASS: homepage post titles and comment links are separate")

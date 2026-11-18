@@ -13,7 +13,9 @@ title: Home
     </h1>
 
     <span class="post-date">{{ post.date | date_to_string }}</span>
-    <a class="post-comments" href="{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.id }}">Comments</a>
+    {% if post.comments %}
+    <a class="post-comments" href="{{ post.url | relative_url }}#comments">Comments</a>
+    {% endif %}
 
     {{ post.content }}
   </div>
