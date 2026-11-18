@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Red Black Tree In Functional Programming
+tags: [Functional Programming, Data Structures]
 ---
 本文介紹 FP 如何實作紅黑樹的新增和刪除，如果不清楚紅黑樹是什麼，或忘記如何 imperatively 操作紅黑樹，可以先到[紅黑樹介紹](https://alrightchiu.github.io/SecondRound/red-black-tree-introjian-jie.html)獲得來龍去脈。
 
